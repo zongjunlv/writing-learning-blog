@@ -8,6 +8,7 @@ const posts = (await getCollection("posts")).sort(
 );
 const latest = posts[0];
 const recent = posts.slice(0, 7);
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="网文新手学习日志">
@@ -35,12 +36,12 @@ const recent = posts.slice(0, 7);
     <div class="panel">
       <h2>新手常见问题</h2>
       <p>按“开篇没钩子、章节太水、压迫感弱、文字像提纲”等问题查学习记录。</p>
-      <a href="/topics/">查看问题索引</a>
+      <a href={`${base}topics/`}>查看问题索引</a>
     </div>
     <div class="panel">
       <h2>写作检查清单</h2>
       <p>写完一章后，用目标、阻力、变化、钩子和句子完整性做基础自检。</p>
-      <a href="/checklists/">查看清单</a>
+      <a href={`${base}checklists/`}>查看清单</a>
     </div>
   </section>
 </BaseLayout>

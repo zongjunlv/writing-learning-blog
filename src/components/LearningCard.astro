@@ -9,11 +9,12 @@ interface Props {
 const { post } = Astro.props;
 const date = post.data.date.toISOString().slice(0, 10);
 const slug = post.id.replace(/\.(md|mdx)$/i, "");
+const base = import.meta.env.BASE_URL;
 ---
 
 <article class="panel card">
   <p class="eyebrow">{date} / {post.data.sampleTitle}</p>
-  <h2><a href={`/posts/${slug}/`}>{post.data.title}</a></h2>
+  <h2><a href={`${base}posts/${slug}/`}>{post.data.title}</a></h2>
   <p class="muted">{post.data.summary}</p>
   <TagList tags={post.data.tags} />
 </article>
