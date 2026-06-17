@@ -1,0 +1,51 @@
+<header class="site-header">
+  <a class="brand" href="/">网文新手学习日志</a>
+  <nav aria-label="主导航">
+    <a href="/posts/">日志</a>
+    <a href="/topics/">问题</a>
+    <a href="/rules/">规则</a>
+    <a href="/checklists/">清单</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    width: min(1080px, calc(100vw - 32px));
+    margin: 0 auto;
+    padding: 18px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    color: var(--ink);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .site-header {
+      align-items: flex-start;
+      flex-direction: column;
+      width: min(100% - 24px, 1080px);
+    }
+  }
+</style>

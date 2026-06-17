@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LearningCard from "../../components/LearningCard.astro";
+
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout title="每日学习日志">
+  <section class="hero">
+    <p class="eyebrow">Daily Notes</p>
+    <h1>每日学习日志</h1>
+    <p>按日期记录每天从一本样本中学到的写作规则、反向错误和检查清单。</p>
+  </section>
+  <div class="grid">
+    {posts.map((post) => <LearningCard post={post} />)}
+  </div>
+</BaseLayout>

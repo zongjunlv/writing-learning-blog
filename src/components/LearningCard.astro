@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import TagList from "./TagList.astro";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+const date = post.data.date.toISOString().slice(0, 10);
+const slug = post.id.replace(/\.(md|mdx)$/i, "");
+---
+
+<article class="panel card">
+  <p class="eyebrow">{date} / {post.data.sampleTitle}</p>
+  <h2><a href={`/posts/${slug}/`}>{post.data.title}</a></h2>
+  <p class="muted">{post.data.summary}</p>
+  <TagList tags={post.data.tags} />
+</article>
+
+<style>
+  .card h2 {
+    margin: 8px 0;
+    line-height: 1.25;
+  }
+
+  .card h2 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .card h2 a:hover {
+    color: var(--accent);
+  }
+</style>

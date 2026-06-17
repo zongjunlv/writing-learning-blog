@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LearningCard from "../components/LearningCard.astro";
+
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const latest = posts[0];
+const recent = posts.slice(0, 7);
+---
+
+<BaseLayout title="网文新手学习日志">
+  <section class="hero">
+    <p class="eyebrow">个人学习日志 / 开源写作规律库</p>
+    <h1>每天从热门完本男频玄幻中提炼可执行写作规则</h1>
+    <p>只学方法，不搬正文，不复刻设定。这里记录一个新手作者如何把每日拆书变成开篇、章节、爽点、压迫感和文字执行检查清单。</p>
+  </section>
+
+  {latest && (
+    <section class="section">
+      <h2>今日学习</h2>
+      <LearningCard post={latest} />
+    </section>
+  )}
+
+  <section class="section">
+    <h2>最近 7 天</h2>
+    <div class="grid">
+      {recent.map((post) => <LearningCard post={post} />)}
+    </div>
+  </section>
+
+  <section class="section grid">
+    <div class="panel">
+      <h2>新手常见问题</h2>
+      <p>按“开篇没钩子、章节太水、压迫感弱、文字像提纲”等问题查学习记录。</p>
+      <a href="/topics/">查看问题索引</a>
+    </div>
+    <div class="panel">
+      <h2>写作检查清单</h2>
+      <p>写完一章后，用目标、阻力、变化、钩子和句子完整性做基础自检。</p>
+      <a href="/checklists/">查看清单</a>
+    </div>
+  </section>
+</BaseLayout>

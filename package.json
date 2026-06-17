@@ -1,0 +1,28 @@
+{
+  "name": "writing-learning-blog",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro check && astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "check": "astro check && vitest run",
+    "test": "vitest run",
+    "generate:daily": "tsx scripts/generate-daily-post.ts",
+    "validate:posts": "tsx scripts/validate-public-post.ts",
+    "publish:daily": "tsx scripts/publish-daily-post.ts"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "latest",
+    "astro": "latest",
+    "gray-matter": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "@types/node": "^25.9.3",
+    "tsx": "latest",
+    "typescript": "latest",
+    "vitest": "latest"
+  }
+}

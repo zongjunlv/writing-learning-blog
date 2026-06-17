@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const topics = await getCollection("topics");
+---
+
+<BaseLayout title="新手常见问题">
+  <section class="hero">
+    <p class="eyebrow">Beginner Problems</p>
+    <h1>新手常见问题</h1>
+    <p>从写作问题进入学习记录：开篇、压迫、爽点、章节水感和文字执行。</p>
+  </section>
+  <div class="grid">
+    {topics.map((topic) => (
+      <article class="panel">
+        <h2>{topic.data.title}</h2>
+        <p class="muted">{topic.data.summary}</p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>
