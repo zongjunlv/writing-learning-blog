@@ -8,7 +8,9 @@ const posts = (await getCollection("posts")).sort(
 );
 const latest = posts[0];
 const recent = posts.slice(0, 7);
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 ---
 
 <BaseLayout title="网文新手学习日志">
