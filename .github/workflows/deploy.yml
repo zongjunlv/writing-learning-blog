@@ -38,6 +38,9 @@ jobs:
         run: npm run check
 
       - name: Build
+        env:
+          PUBLIC_SITE_URL: https://zongjunlv.github.io
+          PUBLIC_SITE_BASE: /writing-learning-blog/
         run: npm run build
 
       - name: Upload Pages artifact
