@@ -10,6 +10,7 @@
     "check": "astro check && vitest run",
     "test": "vitest run",
     "generate:daily": "tsx scripts/generate-daily-post.ts",
+    "sync:learned": "tsx scripts/sync-learned-posts.ts",
     "validate:posts": "tsx scripts/validate-public-post.ts",
     "publish:daily": "tsx scripts/publish-daily-post.ts"
   },
