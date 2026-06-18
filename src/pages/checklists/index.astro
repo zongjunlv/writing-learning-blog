@@ -6,14 +6,15 @@ const checklists = await getCollection("checklists");
 ---
 
 <BaseLayout title="写作检查清单">
-  <section class="hero">
-    <p class="eyebrow">Checklists</p>
-    <h1>写作检查清单</h1>
-    <p>写完一章后，用这些清单检查目标、阻力、变化、钩子、段尾和句子完整性。</p>
+  <section class="hero hero-compact">
+    <div class="hero-content">
+      <h1>写作检查清单</h1>
+      <p>写完一章后，用这些清单检查目标、阻力、变化、钩子、段尾和句子完整性。</p>
+    </div>
   </section>
   <div class="grid">
     {checklists.map((checklist) => (
-      <article class="panel">
+      <article class="panel index-panel">
         <h2>{checklist.data.title}</h2>
         <p class="muted">{checklist.data.summary}</p>
       </article>

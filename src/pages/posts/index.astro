@@ -6,15 +6,30 @@ import LearningCard from "../../components/LearningCard.astro";
 const posts = (await getCollection("posts")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
+const postsByYear = posts.reduce<Record<string, typeof posts>>((groups, post) => {
+  const year = String(post.data.date.getFullYear());
+  groups[year] ??= [];
+  groups[year].push(post);
+  return groups;
+}, {});
+const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
 <BaseLayout title="每日学习日志">
-  <section class="hero">
-    <p class="eyebrow">Daily Notes</p>
-    <h1>每日学习日志</h1>
-    <p>按日期记录每天从一本样本中学到的写作规则、反向错误和检查清单。</p>
+  <section class="hero hero-compact">
+    <div class="hero-content">
+      <h1>每日学习日志</h1>
+      <p>按日期记录每天从一本样本中学到的写作规则、反向错误和检查清单。</p>
+    </div>
   </section>
-  <div class="grid">
-    {posts.map((post) => <LearningCard post={post} />)}
+  <div class="list-stack">
+    {years.map((year) => (
+      <section class="year-block">
+        <h2 class="year-heading">{year}</h2>
+        <div class="list-stack">
+          {postsByYear[year].map((post) => <LearningCard post={post} />)}
+        </div>
+      </section>
+    ))}
   </div>
 </BaseLayout>

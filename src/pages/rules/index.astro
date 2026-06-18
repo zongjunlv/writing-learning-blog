@@ -6,14 +6,15 @@ const rules = await getCollection("rules");
 ---
 
 <BaseLayout title="写作规则库">
-  <section class="hero">
-    <p class="eyebrow">Rules</p>
-    <h1>写作规则库</h1>
-    <p>多天学习后沉淀下来的稳定规则，按结构、爽点、压迫感和文字执行分类。</p>
+  <section class="hero hero-compact">
+    <div class="hero-content">
+      <h1>写作规则库</h1>
+      <p>多天学习后沉淀下来的稳定规则，按结构、爽点、压迫感和文字执行分类。</p>
+    </div>
   </section>
   <div class="grid">
     {rules.map((rule) => (
-      <article class="panel">
+      <article class="panel index-panel">
         <p class="eyebrow">{rule.data.category}</p>
         <h2>{rule.data.title}</h2>
         <p class="muted">{rule.data.summary}</p>

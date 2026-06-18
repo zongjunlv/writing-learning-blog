@@ -15,24 +15,142 @@ const base = import.meta.env.BASE_URL.endsWith("/")
 ---
 
 <article class="panel card">
-  <p class="eyebrow">{date} / {post.data.sampleTitle}</p>
-  <h2><a href={`${base}posts/${slug}/`}>{post.data.title}</a></h2>
-  <p class="muted">{post.data.summary}</p>
+  <a class="card-link" href={`${base}posts/${slug}/`}>
+    <span class="date">{date}</span>
+    <span class="content">
+      <span class="sample">{post.data.sampleTitle}</span>
+      <span class="title">{post.data.title}</span>
+      <span class="summary">{post.data.summary}</span>
+    </span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </a>
   <TagList tags={post.data.tags} />
 </article>
 
 <style>
-  .card h2 {
-    margin: 8px 0;
-    line-height: 1.25;
+  .card {
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    background: rgba(255, 255, 255, 0.66);
   }
 
-  .card h2 a {
+  .card::before,
+  .card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(102%);
+    pointer-events: none;
+  }
+
+  .card::before {
+    background: var(--accent);
+    transition: transform 260ms ease;
+  }
+
+  .card::after {
+    background: var(--ink);
+    transition: transform 420ms ease 60ms;
+  }
+
+  .card:hover::before,
+  .card:hover::after {
+    transform: translateX(0);
+  }
+
+  .card-link {
+    min-height: 136px;
+    display: grid;
+    grid-template-columns: 108px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 24px;
     color: var(--ink);
     text-decoration: none;
+    position: relative;
+    z-index: 1;
+    transition: color 260ms ease;
   }
 
-  .card h2 a:hover {
+  .card:hover .card-link {
+    color: var(--bg);
+  }
+
+  .date {
+    color: var(--muted);
+    font-size: 0.95rem;
+    transition: color 260ms ease;
+  }
+
+  .card:hover .date {
+    color: rgba(251, 251, 248, 0.72);
+  }
+
+  .content {
+    display: grid;
+    gap: 5px;
+  }
+
+  .sample {
     color: var(--accent);
+    font-weight: 800;
+    transition: color 260ms ease;
+  }
+
+  .card:hover .sample {
+    color: var(--accent-3);
+  }
+
+  .title {
+    font-size: clamp(1.35rem, 2.4vw, 1.95rem);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .summary {
+    color: var(--muted);
+    transition: color 260ms ease;
+  }
+
+  .card:hover .summary {
+    color: rgba(251, 251, 248, 0.78);
+  }
+
+  .arrow {
+    color: var(--muted);
+    font-size: 1.5rem;
+    transition:
+      color 260ms ease,
+      transform 260ms ease;
+  }
+
+  .card:hover .arrow {
+    color: var(--accent-3);
+    transform: translate(4px, -4px);
+  }
+
+  .card :global(.tags) {
+    position: relative;
+    z-index: 1;
+    margin: -10px 24px 22px;
+  }
+
+  .card:hover :global(.tags li) {
+    color: rgba(251, 251, 248, 0.82);
+    background: rgba(251, 251, 248, 0.12);
+    border-color: rgba(251, 251, 248, 0.18);
+  }
+
+  @media (max-width: 640px) {
+    .card-link {
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 20px;
+    }
+
+    .date {
+      grid-column: 1 / -1;
+    }
   }
 </style>

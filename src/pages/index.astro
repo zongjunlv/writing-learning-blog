@@ -15,9 +15,14 @@ const base = import.meta.env.BASE_URL.endsWith("/")
 
 <BaseLayout title="网文新手学习日志">
   <section class="hero">
-    <p class="eyebrow">个人学习日志 / 开源写作规律库</p>
-    <h1>每天从热门完本男频玄幻中提炼可执行写作规则</h1>
-    <p>只学方法，不搬正文，不复刻设定。这里记录一个新手作者如何把每日拆书变成开篇、章节、爽点、压迫感和文字执行检查清单。</p>
+    <div class="hero-content">
+      <h1>网文新手学习日志</h1>
+      <p>每天从热门完本男频玄幻中提炼可执行写作规则。只学方法，不搬正文，不复刻设定。</p>
+      <div class="hero-actions">
+        <a class="button-link" href={`${base}posts/`}>查看每日日志</a>
+        <a class="button-link secondary" href={`${base}checklists/`}>写作检查清单</a>
+      </div>
+    </div>
   </section>
 
   {latest && (
@@ -35,12 +40,12 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   </section>
 
   <section class="section grid">
-    <div class="panel">
+    <div class="panel index-panel">
       <h2>新手常见问题</h2>
       <p>按“开篇没钩子、章节太水、压迫感弱、文字像提纲”等问题查学习记录。</p>
       <a href={`${base}topics/`}>查看问题索引</a>
     </div>
-    <div class="panel">
+    <div class="panel index-panel">
       <h2>写作检查清单</h2>
       <p>写完一章后，用目标、阻力、变化、钩子和句子完整性做基础自检。</p>
       <a href={`${base}checklists/`}>查看清单</a>

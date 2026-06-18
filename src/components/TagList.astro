@@ -16,15 +16,20 @@ const { tags } = Astro.props;
     flex-wrap: wrap;
     gap: 8px;
     padding: 0;
-    margin: 12px 0 0;
+    margin: 14px 0 0;
     list-style: none;
   }
 
   .tags li {
-    background: var(--tag);
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid var(--line);
     border-radius: 999px;
     color: var(--muted);
-    font-size: 0.86rem;
-    padding: 3px 10px;
+    font-size: 0.84rem;
+    padding: 3px 11px;
+    transition:
+      color 180ms ease,
+      background 180ms ease,
+      border-color 180ms ease;
   }
 </style>

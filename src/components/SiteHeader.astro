@@ -5,7 +5,10 @@ const base = import.meta.env.BASE_URL.endsWith("/")
 ---
 
 <header class="site-header">
-  <a class="brand" href={base}>网文新手学习日志</a>
+  <a class="brand" href={base} aria-label="网文新手学习日志首页">
+    <span class="brand-mark" aria-hidden="true">文</span>
+    <span>网文新手学习日志</span>
+  </a>
   <nav aria-label="主导航">
     <a href={`${base}posts/`}>日志</a>
     <a href={`${base}topics/`}>问题</a>
@@ -16,42 +19,112 @@ const base = import.meta.env.BASE_URL.endsWith("/")
 
 <style>
   .site-header {
-    width: min(1080px, calc(100vw - 32px));
-    margin: 0 auto;
-    padding: 18px 0;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 86px;
+    padding: 0 max(22px, calc((100vw - 1160px) / 2));
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 24px;
     border-bottom: 1px solid var(--line);
+    background: rgba(251, 251, 248, 0.62);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 18px rgba(20, 24, 30, 0.04);
   }
 
   .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     color: var(--ink);
     font-weight: 800;
     text-decoration: none;
+    white-space: nowrap;
+    transition:
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .brand:hover {
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid currentColor;
+    color: var(--accent-3);
+    font-size: 1.25rem;
+    line-height: 1;
+    position: relative;
+  }
+
+  .brand-mark::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    bottom: -8px;
+    width: 24px;
+    height: 1px;
+    background: currentColor;
   }
 
   nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
+    justify-content: flex-end;
+    gap: clamp(12px, 2.2vw, 30px);
   }
 
   nav a {
     color: var(--muted);
     text-decoration: none;
+    font-size: 1.08rem;
+    transition:
+      color 160ms ease,
+      transform 160ms ease;
   }
 
   nav a:hover {
     color: var(--accent);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 640px) {
     .site-header {
-      align-items: flex-start;
+      height: auto;
+      min-height: 88px;
+      align-items: center;
       flex-direction: column;
-      width: min(100% - 24px, 1080px);
+      justify-content: center;
+      padding: 12px;
+      gap: 10px;
+    }
+
+    .brand {
+      gap: 9px;
+      font-size: 0.98rem;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      font-size: 1rem;
+    }
+
+    nav {
+      gap: 14px;
+    }
+
+    nav a {
+      font-size: 0.96rem;
     }
   }
 </style>
